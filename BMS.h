@@ -4,8 +4,12 @@
 #define BMS_H
 
 // Input how many cells you expect to have
+#ifndef NUM_CELLS
 #define NUM_CELLS 21
+#endif
+#ifndef NUM_TEMP_PROBES
 #define NUM_TEMP_PROBES 4
+#endif
 #define BMS_DEBUG true
 
 typedef struct
