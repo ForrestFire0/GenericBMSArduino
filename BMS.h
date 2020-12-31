@@ -10,7 +10,9 @@
 #ifndef NUM_TEMP_PROBES
 #define NUM_TEMP_PROBES 4
 #endif
-#define BMS_DEBUG true
+#ifndef BMS_DEBUG
+#define BMS_DEBUG false
+#endif
 
 typedef struct
 {

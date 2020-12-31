@@ -17,8 +17,9 @@ void BMS::begin(SoftwareSerial *serialPort)
 
 bool BMS::requestResponse(uint16_t maxWait)
 {
-    // Make sure any remaining data is flusheed out.
+    // Make sure any remaining data is flushed out.
     clear();
+    byte p;
 
     // Send the request
     BMSSerial->write(header, 2);
@@ -41,13 +42,14 @@ bool BMS::requestResponse(uint16_t maxWait)
         delay(10);
     }
 
-// Second byte echos command. Lets make sure it matches the original byte.
+    p = next();
 #if BMS_DEBUG
     Serial.print("Start: ");
-    printHex(next());
+    printHex(p);
     Serial.println();
 #endif
 
+    // Second byte echos command. Lets make sure it matches the original byte.
     indata.command = next();
 #if BMS_DEBUG
     Serial.print("Command: ");
@@ -98,7 +100,7 @@ bool BMS::requestResponse(uint16_t maxWait)
     byte end = next();
 
 #if BMS_DEBUG
-        printHex(end);
+    printHex(end);
 #endif
 
     if (end != 0x77)
