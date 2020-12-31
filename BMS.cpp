@@ -180,8 +180,9 @@ boolean BMS::update(uint16_t maxWait)
             probes[i] = (temp - 2731) / 10.00f;
         }
 
-        MOSFETStatus.charge = indata.data[20] & (1 << 7);
-        MOSFETStatus.discharge = indata.data[20] & (1 << 6);
+        Serial.println(indata.data[20]);
+        MOSFETStatus.charge = !(indata.data[20] & (1 << 7));
+        MOSFETStatus.discharge = !(indata.data[20] & (1 << 6));
     }
     else
     {
