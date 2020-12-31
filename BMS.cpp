@@ -19,7 +19,6 @@ bool BMS::requestResponse(uint16_t maxWait)
 {
     // Make sure any remaining data is flushed out.
     clear();
-    byte p;
 
     // Send the request
     BMSSerial->write(header, 2);
@@ -31,7 +30,9 @@ bool BMS::requestResponse(uint16_t maxWait)
     BMSSerial->write(outdata.checksumB);
     BMSSerial->write(end);
     BMSSerial->flush();
+#if BMS_DEBUG
     Serial.println("\nFinished sending request...");
+#endif
     delay(10);
 
     auto start = millis();
@@ -42,11 +43,13 @@ bool BMS::requestResponse(uint16_t maxWait)
         delay(10);
     }
 
-    p = next();
+    
 #if BMS_DEBUG
     Serial.print("Start: ");
-    printHex(p);
+    printHex(next());
     Serial.println();
+#else
+    next();
 #endif
 
     // Second byte echos command. Lets make sure it matches the original byte.
@@ -156,9 +159,9 @@ boolean BMS::update(uint16_t maxWait)
     outdata.checksumB = 0xFD;
     bool mainSuccess = requestResponse(maxWait);
 
-    if (cellSuccess)
+    if (mainSuccess)
     {
-        balanceState = ((uint32_t)indata.data[13]) << 24 | ((uint32_t)indata.data[14]) << 16 | ((uint32_t)indata.data[15]) << 8 | indata.data[16];
+        balanceState = ((uint32_t)indata.data[14]) << 24 | ((uint32_t)indata.data[15]) << 16 | ((uint16_t)indata.data[12]) << 8 | indata.data[13];
 
         uint16_t temp;
 
@@ -170,7 +173,7 @@ boolean BMS::update(uint16_t maxWait)
 
         if (indata.data[22] != NUM_TEMP_PROBES)
         {
-            Serial.print("Error: wrong number of temp probes found. Found: ");
+            Serial.print(F("Error: num of temp probes. Found: "));
             Serial.print(indata.data[22]);
         }
 
@@ -180,9 +183,8 @@ boolean BMS::update(uint16_t maxWait)
             probes[i] = (temp - 2731) / 10.00f;
         }
 
-        Serial.println(indata.data[20]);
-        MOSFETStatus.charge = !(indata.data[20] & (1 << 7));
-        MOSFETStatus.discharge = !(indata.data[20] & (1 << 6));
+        MOSFETStatus.charge = (indata.data[20] % 2) == 1;
+        MOSFETStatus.discharge = indata.data[20] >= 2;
     }
     else
     {
@@ -197,12 +199,12 @@ boolean BMS::checkStatus(byte status)
     switch (status)
     {
     case 0x80:
-        Serial.println("BMS returned fail code...");
+        Serial.println(F("BMS returned fail code..."));
         return false;
     case 0x00:
         return true;
     default:
-        Serial.println("BMS returned unknown code:");
+        Serial.println(F("BMS returned unknown code:"));
         Serial.println(status);
         return false;
     }

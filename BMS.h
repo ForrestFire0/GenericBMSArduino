@@ -7,9 +7,11 @@
 #ifndef NUM_CELLS
 #define NUM_CELLS 21
 #endif
+
 #ifndef NUM_TEMP_PROBES
 #define NUM_TEMP_PROBES 4
 #endif
+
 #ifndef BMS_DEBUG
 #define BMS_DEBUG false
 #endif
