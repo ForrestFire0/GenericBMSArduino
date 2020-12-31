@@ -11,7 +11,7 @@ Works with:
 </ul>
 Aka, if your board looks like this:
 
-![Image of Yaktocat](https://www.lithiumbatterypcb.com/wp-content/uploads/2018/01/60V-Lithium-Ion-Battery-PCB.jpg)
+![Image of Generic BMS](https://www.lithiumbatterypcb.com/wp-content/uploads/2018/01/60V-Lithium-Ion-Battery-PCB.jpg)
 
 It is probably going to work. Mine was a 21s so it had two of the 16 pin JST connectors at the base. All cell counts should work.
 
@@ -24,6 +24,7 @@ It is probably going to work. Mine was a 21s so it had two of the 16 pin JST con
   1. DO NOT CONNECT THE <fix me> PIN TO VCC. You may connect this pin (which supplies ~10.5 volts) to VIN if you wish to power the Arduino from the BMS.
   
 # Step 2: Setting up the code
+*Just copy the example code!*
 1. Set the number of cells with "#define NUM_CELLS"
 1. Set the number of temperature probes with "#define NUM_TEMP_PROBES"
 1. Create a Software Serial object.
