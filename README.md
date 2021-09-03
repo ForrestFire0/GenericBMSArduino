@@ -3,17 +3,17 @@ Want to access all that juicy battery data from your BMS without having to use [
 Want to display all that data on an Arduino driven LCD or OLED? You have come to the right place.
 
 This is an Arduino library that communicates data from Generic Chinese BMSs.
-Works with:
+Might work with:
 <ul>
 <li>BMSs from lithiumbatterypcb.com aka LLT Power</li>
 <li>'Xiaoxiang' BMS</li>
-<li>Smart BMS</li>
+<li>Some BMS's Labelled "Smart BMS"</li>
 </ul>
 Aka, if your board looks like this:
 
 ![Image of Generic BMS](https://www.lithiumbatterypcb.com/wp-content/uploads/2018/01/60V-Lithium-Ion-Battery-PCB.jpg)
 
-It is probably going to work. Mine was a 21s so it had two of the 16 pin JST connectors at the base. All cell counts should work.
+It is probably going to work. Mine was a 21s so it had two of the 16 pin JST connectors at the base. All cell counts should work. You can always check if the UART protocol matches the protocol linked at the bottom of the page.
 
 <h1>Step 1: Wiring</h1>
 
