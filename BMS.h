@@ -20,7 +20,6 @@ typedef struct
 {
     byte command;
     byte len; //Length of the payload. Does not include cls, id, or checksum bytes
-    byte *data;
     byte checksumA; //Given to us from module. Checked against the rolling calculated A/B checksums.
     byte checksumB;
 } BMSPacket;
@@ -60,6 +59,7 @@ private:
     bool requestResponse(uint16_t maxWait);
 
     float cells[NUM_CELLS];
+    byte buffer[50];
     uint32_t balanceState;
     float packVoltage;
     float packCurrent;
