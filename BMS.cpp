@@ -38,7 +38,7 @@ bool BMS::requestResponse(uint16_t maxWait)
     BMSSerial->write(outdata.command);
     BMSSerial->write(outdata.len);
     if (outdata.len)
-        BMSSerial->write(outdata.data, outdata.len);
+        BMSSerial->write(buffer, outdata.len);
     BMSSerial->write(outdata.checksumA);
     BMSSerial->write(outdata.checksumB);
     BMSSerial->write(end);
@@ -136,7 +136,6 @@ boolean BMS::update(uint16_t maxWait)
     //Request cell data.
     outdata.command = 0x04;
     outdata.len = 0x00;
-    outdata.data = nullptr;
     outdata.checksumA = 0xFF;
     outdata.checksumB = 0xFC;
     bool cellSuccess = requestResponse(maxWait);
@@ -169,7 +168,6 @@ boolean BMS::update(uint16_t maxWait)
     //Request pack data.
     outdata.command = 0x03;
     outdata.len = 0x00;
-    outdata.data = nullptr;
     outdata.checksumA = 0xFF;
     outdata.checksumB = 0xFD;
     bool mainSuccess = requestResponse(maxWait);

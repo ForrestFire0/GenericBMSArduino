@@ -72,7 +72,7 @@ MOSFET_STATUS getMOSFETStatus() { return MOSFETStatus; }
 Sources and Helpful Links
 1. Another [Smart BMS Reader](https://github.com/bres55/Smart-BMS-arduino-Reader) designed for a similar purpose. I would have used this version if it had been in the traditional Arduino Library format (import, instantiate, start, call methods...), or easier to understand.
 1. My [copy of the spreadsheet](https://docs.google.com/spreadsheets/d/1XLCGFEuwLSbxoiXvt5f8QokEm06ZbBmTDPy41bfProQ/edit?usp=sharing) defining the BMS Protocol that explains the protocol and how to communicate with the BMS. I also color coded one of the responses so you can see what bytes mean what.
-1. [Any other information you might ever need](https://wnsnty.xyz/entry/jbd-xiaoyang-smart-bluetooth-bms-information) plus a TON of helpful links that I won't duplicate.
+1. [Any other information you might ever need](https://web.archive.org/web/20210325200036/https://wnsnty.xyz/entry/jbd-xiaoyang-smart-bluetooth-bms-information) plus a TON of helpful links that I won't duplicate.
 
 
 
