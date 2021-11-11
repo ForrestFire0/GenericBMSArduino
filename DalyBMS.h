@@ -30,6 +30,7 @@ typedef struct
 
 const byte header[2] = {0xA5, 0x40};
 const byte end = 0x77;
+uint8_t mbuf[13];
 
 class DalyBMS
 {
