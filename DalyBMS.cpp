@@ -32,16 +32,28 @@ bool DalyBMS::requestResponse(uint16_t maxWait)
 #if BMS_DEBUG
     Serial.println("Starting request...");
 #endif
+    byte wBuff[12];
+    wBuff[0] = header[1]; //fixed start byte 0xA5
+    wBuff[1] = header[2]; //fixed Host byte 0x40
+    wBuff[2] = outdata.command; //request ID
+    wBuff[3] = "0x08"; //fixed length of the following
+    memset(wBuff+4, 0, 8); //place Zeros
+    wBuff[12] = 0;
+      // calculate checksum
+  for(i = 0; i <= 11; i++) {
+    wBuff[12] += wBuff[i];
+    //Serial.println(mbuf[i], HEX);
+  }
     //The goal is to send out something like "a5 40 97 08 00 00 00 00 00 00 00 00 84" (Taken from the first line
     // Send the header. This is the "Frame Head/Start Flag" and also the "Communication Module Address" (a5 and 40)
-    BMSSerial->write(header, 2);
+    BMSSerial->write(wBuff, 13);
     // Send the command. This is "message id" in the "Communications content information" table. (you pick, something between 90 and 97)
-    BMSSerial->write(outdata.command);
+ //   BMSSerial->write(outdata.command);
     // Looks like this is always 8.
-    BMSSerial->write(8);
-    for(byte i = 0; i < 8; i++) //From the dump.txt, looks like we need to send 8 zeros.
-        BMSSerial->write((byte) 0);
-    BMSSerial->write(outdata.checksum); //The last number, the checksum.
+ //   BMSSerial->write(8);
+ //   for(byte i = 0; i < 8; i++) //From the dump.txt, looks like we need to send 8 zeros.
+   //     BMSSerial->write((byte) 0);
+   // BMSSerial->write(outdata.checksum); //The last number, the checksum.
 //    BMSSerial->write(end); //No end byte for DalyBMS
     BMSSerial->flush();
 #if BMS_DEBUG
