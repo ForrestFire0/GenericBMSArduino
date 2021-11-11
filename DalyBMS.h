@@ -12,6 +12,14 @@
 #define NUM_TEMP_PROBES 4
 #endif
 
+#ifndef BMS_HOST_ADDR
+#define BMS_HOST_ADDR 0x40
+#endif
+
+#ifndef BMS_START_ADDR
+#define BMS_START_ADRR 0xA5
+#endif
+
 #ifndef BMS_DEBUG
 #define BMS_DEBUG false
 #endif
@@ -29,7 +37,7 @@ typedef struct
 } MOSFET_STATUS;
 
 const byte header[2] = {0xA5, 0x40};
-const byte end = 0x77;
+const byte end = 0x77; //Daly dont need end byte
 uint8_t mbuf[13];
 
 class DalyBMS
