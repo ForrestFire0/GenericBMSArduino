@@ -32,9 +32,8 @@ bool DalyBMS::requestResponse(uint16_t maxWait)
 #if BMS_DEBUG
     Serial.println("Starting request...");
 #endif
-    byte wBuff[12];
-    wBuff[0] = header[1]; //fixed start byte 0xA5
-    wBuff[1] = header[2]; //fixed Host byte 0x40
+    wBuff[0] = BMS_START_ADDR; //fixed start byte 0xA5
+    wBuff[1] = BMS_HOST_ADDR; //fixed Host byte 0x40
     wBuff[2] = outdata.command; //request ID
     wBuff[3] = "0x08"; //fixed length of the following
     memset(wBuff+4, 0, 8); //place Zeros
