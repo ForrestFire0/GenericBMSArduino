@@ -21,7 +21,7 @@ It is probably going to work. Mine was a 21s so it had two of the 16 pin JST con
 1. Connect the Arduino
   1. Connect the ground of the arduino to the ground of the BMS
   1. Connect the RX and TX to any two pins on the Arduino
-  1. DO NOT CONNECT THE <fix me> PIN TO VCC. You may connect this pin (which supplies ~10.5 volts) to VIN if you wish to power the Arduino from the BMS.
+  1. DO NOT CONNECT THE FOURTH PIN TO VCC. You may connect this pin (which supplies ~10.5 volts) to VIN if you wish to power the Arduino from the BMS.
   
 # Step 2: Setting up the code
 *Just copy the example code!*
